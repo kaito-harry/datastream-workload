@@ -1,0 +1,21 @@
+edition = 1
+exports = ["protos/duplex_stream.proto"]
+
+[package]
+name = "DuplexStreamService"
+manufacturer = "actrium"
+version = "0.1.0"
+description = "DuplexStreamService for DataStreamApp dev environment (native cdylib)"
+license = "Apache-2.0"
+
+[binary]
+path = "target/release/libdatastream_guest.so"
+target = "x86_64-unknown-linux-gnu"
+
+[build]
+tool = "cargo"
+manifest_path = "Cargo.toml"
+artifact = "lib"
+profile = "release"
+target = "x86_64-unknown-linux-gnu"
+features = ["cdylib"]
