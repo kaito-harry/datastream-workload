@@ -3,34 +3,46 @@
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct StartDuplexStreamRequest {
     #[prost(string, tag = "1")]
-    pub client_to_service_stream_id: ::prost::alloc::string::String,
+    pub session_id: ::prost::alloc::string::String,
     #[prost(string, tag = "2")]
-    pub service_to_client_stream_id: ::prost::alloc::string::String,
-    #[prost(enumeration = "StreamPayloadMode", tag = "3")]
+    pub client_to_service_stream_id: ::prost::alloc::string::String,
+    #[prost(uint32, tag = "3")]
+    pub client_chunk_count: u32,
+    #[prost(enumeration = "StreamPayloadMode", tag = "4")]
     pub payload_mode: i32,
-    #[prost(uint32, tag = "4")]
-    pub chunk_count: u32,
+    #[prost(string, tag = "5")]
+    pub note: ::prost::alloc::string::String,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct StartDuplexStreamResponse {
-    #[prost(bool, tag = "1")]
-    pub ready: bool,
+    #[prost(string, tag = "1")]
+    pub session_id: ::prost::alloc::string::String,
     #[prost(string, tag = "2")]
-    pub message: ::prost::alloc::string::String,
+    pub accepted_client_to_service_stream_id: ::prost::alloc::string::String,
+    #[prost(string, tag = "3")]
+    pub service_to_client_stream_id: ::prost::alloc::string::String,
+    #[prost(string, tag = "4")]
+    pub status: ::prost::alloc::string::String,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct FinishDuplexStreamRequest {
     #[prost(string, tag = "1")]
-    pub client_to_service_stream_id: ::prost::alloc::string::String,
+    pub session_id: ::prost::alloc::string::String,
     #[prost(string, tag = "2")]
+    pub client_to_service_stream_id: ::prost::alloc::string::String,
+    #[prost(string, tag = "3")]
     pub service_to_client_stream_id: ::prost::alloc::string::String,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct FinishDuplexStreamResponse {
-    #[prost(bool, tag = "1")]
-    pub acknowledged: bool,
-    #[prost(string, tag = "2")]
-    pub message: ::prost::alloc::string::String,
+    #[prost(string, tag = "1")]
+    pub session_id: ::prost::alloc::string::String,
+    #[prost(uint32, tag = "2")]
+    pub client_chunks_received: u32,
+    #[prost(uint32, tag = "3")]
+    pub service_chunks_sent: u32,
+    #[prost(string, tag = "4")]
+    pub status: ::prost::alloc::string::String,
 }
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]

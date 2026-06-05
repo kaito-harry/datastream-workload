@@ -102,8 +102,7 @@ impl<T: DuplexStreamServiceHandler> DuplexStreamServiceWorkload<T> {
 pub struct DuplexStreamServiceDispatcher<T: DuplexStreamServiceHandler>(
     std::marker::PhantomData<T>,
 );
-#[cfg_attr(target_arch = "wasm32", async_trait::async_trait(?Send))]
-#[cfg_attr(not(target_arch = "wasm32"), async_trait::async_trait)]
+#[async_trait]
 impl<T: DuplexStreamServiceHandler> MessageDispatcher for DuplexStreamServiceDispatcher<T> {
     type Workload = DuplexStreamServiceWorkload<T>;
     async fn dispatch<C: Context>(
