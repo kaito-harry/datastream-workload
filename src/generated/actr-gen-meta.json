@@ -1,0 +1,31 @@
+{
+  "plugin_version": "actr-cli",
+  "language": "rust",
+  "local_services": [
+    {
+      "name": "DuplexStreamService",
+      "package": "local",
+      "proto_file": "duplex_stream.proto",
+      "handler_interface": "DuplexStreamServiceHandler",
+      "workload_type": "DuplexStreamServiceWorkload",
+      "dispatcher_type": "DuplexStreamServiceDispatcher",
+      "methods": [
+        {
+          "name": "StartDuplexStream",
+          "snake_name": "start_duplex_stream",
+          "input_type": "StartDuplexStreamRequest",
+          "output_type": "StartDuplexStreamResponse",
+          "route_key": "local.DuplexStreamService.StartDuplexStream"
+        },
+        {
+          "name": "FinishDuplexStream",
+          "snake_name": "finish_duplex_stream",
+          "input_type": "FinishDuplexStreamRequest",
+          "output_type": "FinishDuplexStreamResponse",
+          "route_key": "local.DuplexStreamService.FinishDuplexStream"
+        }
+      ]
+    }
+  ],
+  "remote_services": []
+}

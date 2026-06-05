@@ -1,0 +1,34 @@
+syntax = "proto3";
+package local;
+
+enum StreamPayloadMode {
+  STREAM_RELIABLE = 0;
+  STREAM_LATENCY_FIRST = 1;
+}
+
+service DuplexStreamService {
+  rpc StartDuplexStream(StartDuplexStreamRequest) returns (StartDuplexStreamResponse);
+  rpc FinishDuplexStream(FinishDuplexStreamRequest) returns (FinishDuplexStreamResponse);
+}
+
+message StartDuplexStreamRequest {
+  string client_to_service_stream_id = 1;
+  string service_to_client_stream_id = 2;
+  StreamPayloadMode payload_mode = 3;
+  uint32 chunk_count = 4;
+}
+
+message StartDuplexStreamResponse {
+  bool ready = 1;
+  string message = 2;
+}
+
+message FinishDuplexStreamRequest {
+  string client_to_service_stream_id = 1;
+  string service_to_client_stream_id = 2;
+}
+
+message FinishDuplexStreamResponse {
+  bool acknowledged = 1;
+  string message = 2;
+}

@@ -1,0 +1,23 @@
+edition = 1
+exports = ["protos/duplex_stream.proto"]
+
+[package]
+name = "DuplexStreamService"
+manufacturer = "actrium"
+version = "0.1.0"
+description = "DuplexStreamService for DataStreamApp dev environment"
+license = "Apache-2.0"
+
+[binary]
+path = "dist/datastream_guest.wasm"
+target = "wasm32-wasip2"
+
+[build]
+tool = "cargo"
+manifest_path = "Cargo.toml"
+artifact = "lib"
+profile = "release"
+target = "wasm32-wasip2"
+post_build = [
+  'mkdir -p "$(dirname "$ACTR_BUILD_BINARY_PATH")" && cp "$ACTR_BUILD_CARGO_TARGET_DIR/$ACTR_BUILD_TARGET/$ACTR_BUILD_PROFILE/datastream_guest.wasm" "$ACTR_BUILD_BINARY_PATH"',
+]
